@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int top = -1, size = 10, item, arr_stack[10];
+int top = -1, size = 5, item, arr_stack[10];
 
 void push(){
-    if(top >= size){
-        printf("Overflow");
+    if(top >= size - 1){
+        printf("Overflow\n");
     }
     else{
     printf("Enter your Item\t");
@@ -38,6 +38,7 @@ void display(){
 int main()
 {
     int choice;
+    printf("You've got a Stack of Size 5");
     while(choice!= 4){
     printf("1.Push\t 2.Pop\t 3.Display\t 4.Exit\t\n");
     scanf("%d",&choice);
