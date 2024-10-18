@@ -1,0 +1,62 @@
+#include <stdio.h>
+//#define SIZE 5
+int front = -1,rear = -1, item;
+int queue[5];
+	void enqueue(){
+		if(rear == 4){
+			printf("Queue is full\n");
+		}
+		else{
+			printf("Enter element");
+			scanf("%d",&item);
+			rear = rear + 1;
+			queue[rear] = item;
+		}	
+}
+	void dequeue(){
+		item = queue[front];
+		if(front = rear)
+			front = rear = 0;
+		else
+			front = front + 1;
+		printf("Deleted item is %d\n", item);		
+}
+	
+
+	void display(){
+		for(int i = front ; i <= rear; i++){
+			printf("%d\t", queue[i]);
+	}
+		printf("\n");
+
+}
+
+int main(){
+	int choice;
+	printf("You've a Queue of Size 100!!!\n");
+	//scanf("%d",&size);
+	while(choice!=4)
+	{
+		printf("1.ENQUEUE\n2.DEQUEUE\n3.TRAVERSE\n4.EXIT\n");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				enqueue();
+				break;
+			case 2:
+				dequeue();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				return(0);
+			default:
+				printf("Invalid Entry, Try Again!!!\n");
+				
+		}
+	}
+
+	return(0);
+}
