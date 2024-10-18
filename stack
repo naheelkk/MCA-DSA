@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int size, top = -1, item;
+int stack[size];
+void push(){
+	printf("Enter element");
+	scanf("%d",&item);
+	top = top + 1;
+	array[top] = item;
+}
+void pop(){}
+void display(){
+	for(int i = 0 ; i < top; i++){
+		printf("%d", array[i]);
+	
+	}
+
+}
+
+int main(){
+	int choice;
+	printf("Enter Size of Stack");
+	scanf("%d",&size);
+	while(choice!=4)
+	{
+		printf("1.POP\t2.PUSH\t3.TRAVERSE\t4.EXIT\n");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				push();
+				break;
+			case 2:
+				pop();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				return(0);
+			default:
+				printf("Invalid Entry, Try Again!!!\n");
+				
+		}
+	}
+
+	return(0);
+}
