@@ -1,48 +1,62 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int size, top = -1, item;
-int stack[size];
+int top = -1, size = 10, item, arr_stack[10];
+
 void push(){
-	printf("Enter element");
-	scanf("%d",&item);
-	top = top + 1;
-	array[top] = item;
+    if(top >= size){
+        printf("Overflow");
+    }
+    else{
+    printf("Enter your Item\t");
+    scanf("%d",&item);
+    top++;
+    arr_stack[top] = item;
+    }
 }
-void pop(){}
+
+void pop(){
+    if(top < 0){
+        printf("Empty Stack");
+    }
+    else{
+        item = arr_stack[top];
+        printf("popped item is %d\n",item);
+        top--;
+    }
+}
+
 void display(){
-	for(int i = 0 ; i < top; i++){
-		printf("%d", array[i]);
-	
-	}
-
+    for(int i = 0; i <= top; i++){
+        printf("%d\t",arr_stack[i]);
+    }
+    printf("\n");
 }
 
-int main(){
-	int choice;
-	printf("Enter Size of Stack");
-	scanf("%d",&size);
-	while(choice!=4)
-	{
-		printf("1.POP\t2.PUSH\t3.TRAVERSE\t4.EXIT\n");
-		scanf("%d",&choice);
-		switch(choice)
-		{
-			case 1:
-				push();
-				break;
-			case 2:
-				pop();
-				break;
-			case 3:
-				display();
-				break;
-			case 4:
-				return(0);
-			default:
-				printf("Invalid Entry, Try Again!!!\n");
-				
-		}
-	}
 
-	return(0);
+
+int main()
+{
+    int choice;
+    while(choice!= 4){
+    printf("1.Push\t 2.Pop\t 3.Display\t 4.Exit\t\n");
+    scanf("%d",&choice);
+        switch(choice){
+        case 1:
+            push();
+            break;
+        case 2:
+            pop();
+            break;
+        case 3:
+            display();
+            break;
+        case 4:
+            return 0;
+        default:
+            printf("Invalid Choice\n");
+            break;
+        }
+    }
+    return 0;
 }
