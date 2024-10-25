@@ -3,7 +3,7 @@
 
 int front = 0, rear = -1, size = 5, item, arr_queue[5];
 
-void push(){
+void enqueue(){
     if(rear >= size - 1){
         printf("Overflow\n");
     }
@@ -15,13 +15,13 @@ void push(){
     }
 }
 
-void pop(){
+void dequeue(){
     if(front > rear){
         printf("Underflow (Queue is Empty)\n");
     }
     else{
         item = arr_queue[front];
-        printf("Popped item is %d\n", item);
+        printf("dequeued item is %d\n", item);
         front++;
     }
 }
@@ -42,14 +42,14 @@ int main(){
     int choice;
     printf("You've got a Queue of Size %d\n", size);
     while(choice != 4){
-        printf("1.Push\t 2.Pop\t 3.Display\t 4.Exit\n");
+        printf("1.enqueue\t 2.dequeue\t 3.Display\t 4.Exit\n");
         scanf("%d", &choice);
         switch(choice){
             case 1:
-                push();
+                enqueue();
                 break;
             case 2:
-                pop();
+                dequeue();
                 break;
             case 3:
                 display();
