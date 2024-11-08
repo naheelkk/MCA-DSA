@@ -46,11 +46,15 @@ void insertAtEnd(int data)
 {
 	struct Node*newnode;
 	newnode=CreateNode(data);
-	struct Node*ptr;
-	while(ptr -> link != NULL)
+
+	if(header == NULL)
+		header = newnode;
+	else
+	{	struct Node*ptr = header;		
+		while(ptr -> link != NULL)
 		ptr = ptr -> link;
-	newnode -> link = ptr;
-	ptr = newnode;
+		ptr -> link = newnode;
+	}
 }
 
 int main()
