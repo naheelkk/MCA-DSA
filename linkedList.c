@@ -141,18 +141,57 @@ void deleteAtAny(int key)
 
 int main()
 {
+    int choice,data;
+    while(choice != 8)
+    {
+        printf("1.Insert at Front\n2.Insert at End\n3.Insert at Any\n4.Delete at End\n5.Delete at First\n6.Delete at Any\n7.Traverse\n8.Exit\n");
+        printf("Enter Choice\n");
+        scanf("%d",&choice);
+        switch(choice)
+        {
+        case 1:
+            printf("Enter data");
+            scanf("%d",&data);
+            insertAtFront(data);
+            break;
+        case 2:
+            printf("Enter data");
+            scanf("%d",&data);
+            insertAtEnd(data);
+            break;
+        case 3:
+            printf("Enter position");
+            int pos;
+            scanf("%d",&pos);
+            printf("Enter data");
+            scanf("%d",&data);
+            insertAtAny(data,pos);
+            break;
+        case 4:
+            deleteAtEnd();
+            printf("Success");
+            break;
+        case 5:
+            deleteAtFront();
+            printf("Success");
+            break;
+        case 6:
+            traversal();
+            printf("What do you want to delete");
+            scanf("%d",&pos);
+            deleteAtAny(pos);
+            break;
+        case 7:
+            traversal();
+            break;
+        case 8:
+            return;
+        default:
+            printf("Wrong Choice");
+            break;
+        }
+        }
 	struct Node*node;
-	insertAtFront(10);
-	insertAtFront(20);
-	insertAtFront(90);
-	insertAtEnd(100);
-	traversal();
-	deleteAtFront();
-	traversal();
-	deleteAtEnd();
-	traversal();
-	deleteAtAny(90);
-	traversal();
-
-	return(0);
+	return 0;
 }
+
