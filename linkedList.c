@@ -50,9 +50,9 @@ void insertAtEnd(int data)
 	if(header == NULL)
 		header = newnode;
 	else
-	{	struct Node*ptr = header;		
+	{	struct Node*ptr = header;
 		while(ptr -> link != NULL)
-		
+
 		ptr = ptr -> link;
 		ptr -> link = newnode;
 	}
@@ -61,8 +61,8 @@ void insertAtEnd(int data)
 void insertAtAny(int data, int position)
 {
     struct Node *newnode, *ptr, *prev;
-    newnode = CreateNode(data); 
-    if (position == 0) 
+    newnode = CreateNode(data);
+    if (position == 0)
     {
         newnode->link = header;
         header = newnode;
@@ -106,15 +106,37 @@ void deleteAtEnd()
 	else
 	{
 		struct Node *ptr1 = header;
-		struct Node *ptr2;		
+		struct Node *ptr2;
 		while(ptr1 -> link != NULL)
 		{
 			ptr2 = ptr1;
 			ptr1 = ptr1 -> link;
-		}	
+		}
 		ptr2 -> link = NULL;
 		free(ptr1);
 	}
+}
+void deleteAtAny(int key)
+{
+    if(header == NULL)
+        printf("List is empty");
+   struct Node *ptr1 = header, *ptr2 = NULL;
+   if(ptr1 -> data == key)
+   {
+       header = ptr1 -> link;
+       free(ptr1);
+       return;
+   }
+   while(ptr1 != NULL & ptr1 -> data != key)
+   {
+       ptr2 = ptr1;
+       ptr1 = ptr1 -> link
+       ;
+   }
+   if(ptr1 == NULL)
+        printf("Key not found");
+    ptr2 -> link = ptr1 -> link;
+   free(ptr1);
 }
 
 int main()
@@ -128,6 +150,8 @@ int main()
 	deleteAtFront();
 	traversal();
 	deleteAtEnd();
+	traversal();
+	deleteAtAny(90);
 	traversal();
 
 	return(0);
