@@ -78,7 +78,7 @@ void insertAtAny(int data, int pos)
         }
         else
         {
-            printf("Position not found");
+            printf("Position not found\n");
             free(newnode);
         }
     }
@@ -88,7 +88,7 @@ void deleteAtFront()
 {
     struct Node *ptr = header;
     if (header == NULL)
-        printf("Empty List");
+        printf("Empty List\n");
     else
     {
         header = header->Rlink;
@@ -102,7 +102,7 @@ void deleteAtEnd()
 {
     struct Node *prev, *ptr = header;
     if (header == NULL)
-        printf("Empty List");
+        printf("Empty List\n");
     else
     {
         while (ptr->Rlink != NULL)
@@ -119,7 +119,7 @@ void deleteAtAny(int key)
 {
     struct Node *prev, *ptr = header;
     if (header == NULL)
-        printf("List is Empty");
+        printf("List is Empty\n");
     if (ptr->data == key)
     {
         header = ptr->Rlink;
@@ -131,11 +131,34 @@ void deleteAtAny(int key)
         ptr = ptr->Rlink;
     }
     if (ptr == NULL)
-        printf("Key Not Found");
+        printf("Key Not Found\n");
     prev->Rlink = ptr->Rlink;
     free(ptr);
 }
-
+void search(int key)
+{
+    struct Node *ptr = header;
+    int pos = 0;
+    if (header == NULL)
+        printf("List is Empty\n");
+    else
+    {
+        while (ptr != NULL)
+        {
+            if (ptr->data == key)
+            {
+                printf("Position is %d\n", pos + 1);
+                return;
+            }
+            else
+            {
+                ptr = ptr->Rlink;
+                pos++;
+            }
+        }
+        printf("Key Not found\n");
+    }
+}
 void traversal()
 {
     struct Node *ptr;
@@ -146,10 +169,6 @@ void traversal()
         ptr = ptr->Rlink;
     }
     printf("\n");
-}
-
-void search()
-{
 }
 
 int main()
@@ -197,6 +216,7 @@ int main()
             traversal();
             break;
         case 8:
+            traversal();
             printf("Enter key to search");
             scanf("%d", &key);
             search(key);
