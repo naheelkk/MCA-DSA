@@ -3,85 +3,92 @@
 
 struct Node
 {
-    int data;
-    struct Node *Rlink;
-    struct Node *Llink;
+	int data;
+	struct Node *Rlink;
+	struct Node *Llink;
 };
 struct Node *header = NULL;
 struct Node *CreateNode(int data)
 {
-    struct Node *newnode;
-    newnode = malloc(sizeof(struct Node));
-    newnode->data = data;
-    newnode->Rlink = NULL;
-    newnode->Llink = NULL;
-    return (newnode);
+	struct Node *newnode;
+	newnode = (struct Node *) malloc(sizeof(struct Node));
+	newnode->data = data;
+	newnode->Rlink = NULL;
+	newnode->Llink = NULL;
+	return (newnode);
 };
-
 void insertAtFront(int data)
 {
-    struct Node *newnode;
-    if (header == NULL)
-    {
-        newnode = CreateNode(data);
-        header = newnode;
-    }
-    else
-    {
-        newnode = CreateNode(data);
-        newnode->Llink = NULL;
-        newnode->Rlink = header;
-        header = newnode;
-    }
+	struct Node *newnode;
+	if (header == NULL)
+	{
+		newnode = CreateNode(data);
+		header = newnode;
+	}
+	else
+	{
+		newnode = CreateNode(data);
+		newnode->Llink = NULL;
+		newnode->Rlink = header;
+		header = newnode;
+	}
 }
 void insertAtEnd(int data)
 {
-    struct Node *newnode = CreateNode(data);
-    struct Node *ptr = header;
-    if (header == NULL)
-        header = newnode;
-    else
-    {
-        while (ptr->Rlink != NULL)
-        {
-            ptr = ptr->Rlink;
-        }
-        ptr->Rlink = newnode;
-        newnode->Llink = ptr;
-    }
+	struct Node *newnode = CreateNode(data);
+	int pos = 1;
+	struct Node *ptr = header;
+	if (header == NULL)
+		header = newnode;
+	else
+	{
+		while (ptr->Rlink != NULL)
+		{
+			ptr = ptr->Rlink;
+			pos++;
+		}	
+			pos = pos + 1;
+			ptr->Rlink = newnode;
+			newnode->Llink = ptr;
+			printf("Inserted at %d\n",pos);
+	}
 }
 void insertAtAny(int data, int pos)
 {
-    struct Node *newnode = CreateNode(data);
-    struct Node *ptr = header, *prev;
-    int currentPos = 0;
-    if (pos == 0)
-    {
-        newnode->Rlink = header;
-        header = newnode;
-    }
-    else
-    {
-        while (ptr != NULL && currentPos < pos)
-        {
-            prev = ptr;
-            ptr = ptr->Rlink;
-            currentPos++;
-        }
-        if (currentPos == pos)
-        {
-            newnode->Llink = prev;
-            newnode->Rlink = ptr;
-            prev->Rlink = newnode;
-            if (ptr != NULL)
-                ptr->Llink = newnode;
-        }
-        else
-        {
-            printf("Position not found\n");
-            free(newnode);
-        }
-    }
+	struct Node *newnode = CreateNode(data);
+	struct Node *ptr = header, *prev;
+	int currentPos = 1;
+	if (pos == 1)
+	{
+		newnode->Rlink = header;
+		header = newnode;
+	}
+	else if(pos == 0)
+	{
+		printf("Node Starts at 0");
+	}	
+	else
+	{
+		while (ptr != NULL && currentPos < pos)
+		{
+			prev = ptr;
+			ptr = ptr->Rlink;
+			currentPos++;
+		}
+		if (currentPos == pos)
+		{
+			newnode->Llink = prev;
+			newnode->Rlink = ptr;
+			prev->Rlink = newnode;
+			if (ptr != NULL)
+				ptr->Llink = newnode;
+		}
+		else
+		{
+			printf("Position not found\n");
+			free(newnode);
+		}
+	}
 }
 
 void deleteAtFront()
@@ -101,6 +108,7 @@ void deleteAtFront()
 void deleteAtEnd()
 {
     struct Node *prev, *ptr = header;
+	int pos = 1;
     if (header == NULL)
         printf("Empty List\n");
     else
@@ -109,9 +117,12 @@ void deleteAtEnd()
         {
             prev = ptr;
             ptr = ptr->Rlink;
+			pos++;
         }
+		pos = pos + 1;
         prev->Rlink = NULL;
         free(ptr);
+		printf("Deleted At %d",pos);
     }
 }
 
@@ -138,7 +149,7 @@ void deleteAtAny(int key)
 void search(int key)
 {
     struct Node *ptr = header;
-    int pos = 0;
+    int pos = 1;
     if (header == NULL)
         printf("List is Empty\n");
     else
@@ -173,59 +184,62 @@ void traversal()
 
 int main()
 {
-    int choice, data, key;
-    while (choice != 9)
-    {
-        printf("1.Insert at Front\n2.Insert at End\n3.Insert at Any\n4.Delete at End\n5.Delete at First\n6.Delete at Any\n7.Traverse\n8.Search\n9.Exit\n");
+int choice, data, key;
+while (choice != 9)
+{
+        printf("\n1.Insert at Front\n2.Insert at End\n3.Insert at Any\n4.Delete at End\n5.Delete at First\n6.Delete at Any\n7.Traverse\n8.Search\n9.Exit\n");
         printf("Enter Choice\n");
         scanf("%d", &choice);
-        switch (choice)
-        {
+	switch (choice)
+	{
         case 1:
-            printf("Enter data");
-            scanf("%d", &data);
-            insertAtFront(data);
-            break;
+		printf("Enter data");
+		scanf("%d", &data);
+		insertAtFront(data);
+		printf("\nData Inserted At 1\n");	
+		break;
         case 2:
-            printf("Enter data");
-            scanf("%d", &data);
-            insertAtEnd(data);
-            break;
-        case 3:
-            printf("Enter where do you want to add data");
-            scanf("%d", &key);
-            printf("Enter data");
-            scanf("%d", &data);
-            insertAtAny(data, key);
-            break;
-        case 4:
-            deleteAtEnd();
-            printf("Deleted");
-            break;
-        case 5:
-            deleteAtFront();
-            printf("Deleted");
-            break;
-        case 6:
-            traversal();
-            printf("What element you want to delete");
-            scanf("%d", &key);
-            deleteAtAny(key);
-            break;
-        case 7:
-            traversal();
-            break;
-        case 8:
-            traversal();
-            printf("Enter key to search");
-            scanf("%d", &key);
-            search(key);
-            break;
-        case 9:
-            return 0;
-        default:
-            printf("Wrong Choice");
-        }
+		printf("Enter data");
+		scanf("%d", &data);
+		insertAtEnd(data);
+		break;
+	case 3:
+		printf("Enter where do you want to add data");
+		scanf("%d", &key);
+		printf("Enter data");
+		scanf("%d", &data);
+		insertAtAny(data, key);
+		printf("Data inserted at %d",key);
+		break;
+	case 4:
+		deleteAtEnd();
+		printf("Deleted");
+		break;
+	case 5:
+		deleteAtFront();
+		printf("\nDeleted at Position 1\n");
+		break;
+    case 6:
+		traversal();
+		printf("What element you want to delete\n");
+		scanf("%d", &key);
+		deleteAtAny(key);
+		printf("Deleted at Position %d",key);
+		break;
+	case 7:
+		traversal();
+		break;
+	case 8:
+		traversal();
+		printf("Enter key to search");
+		scanf("%d", &key);
+		search(key);
+		break;
+	case 9:
+		return 0;
+	default:
+		printf("Wrong Choice");
+}
     }
     return 0;
 }
