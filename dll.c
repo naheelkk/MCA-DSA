@@ -53,6 +53,12 @@ void insertAtEnd(int data)
 			printf("Inserted at %d\n",pos);
 	}
 }
+
+void insertAtAny_Method2(int data, int pos)
+{
+	
+}
+
 void insertAtAny(int data, int pos)
 {
 	struct Node *newnode = CreateNode(data);
@@ -102,6 +108,7 @@ void deleteAtFront()
         if (header != NULL)
             header->Llink = NULL;
         free(ptr);
+	printf("\nDeleted at Position 1\n");
     }
 }
 
@@ -119,10 +126,10 @@ void deleteAtEnd()
             ptr = ptr->Rlink;
 			pos++;
         }
-		pos = pos + 1;
+	pos = pos + 1;
         prev->Rlink = NULL;
         free(ptr);
-		printf("Deleted At %d",pos);
+	printf("Deleted At %d",pos);
     }
 }
 
@@ -196,7 +203,7 @@ while (choice != 9)
 		printf("Enter data");
 		scanf("%d", &data);
 		insertAtFront(data);
-		printf("\nData Inserted At 1\n");	
+		printf("\nData Inserted At Position 1\n");	
 		break;
         case 2:
 		printf("Enter data");
@@ -209,15 +216,15 @@ while (choice != 9)
 		printf("Enter data");
 		scanf("%d", &data);
 		insertAtAny(data, key);
-		printf("Data inserted at %d",key);
+		printf("Data inserted at Position %d",key);
 		break;
 	case 4:
 		deleteAtEnd();
-		printf("Deleted");
+		
 		break;
 	case 5:
 		deleteAtFront();
-		printf("\nDeleted at Position 1\n");
+		
 		break;
     case 6:
 		traversal();
