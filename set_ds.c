@@ -140,11 +140,14 @@ int main()
             break;
         case 4:
             difference(set1_bit, set2_bit, result);
-            printf("\nSet Difference of Set 1 and Set 2 is :\n");
+            printf("\nSet Difference S1 - S2 is :\n");
+	    printBitVector(result);
+	    difference(set2_bit, set1_bit, result);
+	    printf("\nSet Difference S2 - S1 is :\n");
             printBitVector(result);
             break;
         case 5:
-            return;
+            return 0;
         default:
             printf("\nInvalid Choice, Try Again\n");
         }
