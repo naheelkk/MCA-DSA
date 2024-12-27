@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-
 struct Node
 {
     int data;
     struct Node *link;
 };
+// size = 5;
+int position = 0;
 struct Node *header = NULL;
 struct Node *CreateNode(int data)
 {
@@ -13,14 +14,14 @@ struct Node *CreateNode(int data)
     newnode = (struct Node *)malloc(sizeof(struct Node));
     newnode->data = data;
     newnode->link = NULL;
+    position++;
     return (newnode);
 };
-
 void traverse()
 {
     struct Node *ptr = header;
     if (ptr == NULL)
-        printf("\nEmpty Stack\n");
+        printf("\nEmpty Stack!!\n");
     else
     {
         printf("\n");
@@ -32,13 +33,21 @@ void traverse()
     }
     printf("\n");
 }
-
 void push(int data)
 {
-    struct Node *newnode;
-    newnode = CreateNode(data);
-    newnode->link = header;
-    header = newnode;
+    if (position == 5)
+    {
+        printf("Stack Overflow!!!");
+        return;
+    }
+    else
+    {
+        struct Node *newnode;
+        newnode = CreateNode(data);
+        newnode->link = header;
+        header = newnode;
+        printf("\nItem added to Position: %d\n", position);
+    }
 }
 
 void pop()
@@ -55,11 +64,12 @@ void pop()
         header = ptr->link;
         free(ptr);
     }
+    position--;
 }
-
 int main()
 {
     int choice, data;
+    printf("You have got a stack of Size 5");
     while (choice != 4)
     {
         printf("\n1.Push\n2.Pop\n3.Traverse\n4.Exit\n");
@@ -80,11 +90,11 @@ int main()
             break;
         case 4:
             printf("Exiting");
-            return;
+            return 0;
         default:
             printf("\nInvalid Choice");
             break;
         }
     }
-    return (0);
+    return 0;
 }

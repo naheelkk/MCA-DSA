@@ -2,7 +2,6 @@
 #include <stdlib.h>
 
 int top = -1, size = 5, item, arr_stack[10];
-
 void push()
 {
     if (top >= size - 1)
@@ -31,18 +30,14 @@ void pop()
         top--;
     }
 }
-
 void display()
 {
-    if (top < 0)
-        printf("Stack is empty");
-    for (int i = 0; i <= top; i++)
+    for (int i = top; i >= 0; i--)
     {
         printf("%d\t", arr_stack[i]);
     }
     printf("\n");
 }
-
 int main()
 {
     int choice;

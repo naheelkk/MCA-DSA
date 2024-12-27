@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-struct Node // creating double linkedlist
+struct Node
 {
     int data;
     struct Node *Rlink;
@@ -29,8 +28,8 @@ void insertAtFront(int data)
     {
         newnode = CreateNode(data);
         newnode->Llink = NULL;
-        newnode->Rlink = header; // right link points to old header
-        header = newnode;        // updating header, newnode will become new header
+        newnode->Rlink = header;
+        header = newnode;
     }
 }
 void insertAtEnd(int data)
@@ -42,19 +41,19 @@ void insertAtEnd(int data)
         header = newnode;
     else
     {
-        while (ptr->Rlink != NULL) // traversing until right link is null(end)
+        while (ptr->Rlink != NULL)
         {
             ptr = ptr->Rlink;
             pos++;
         }
         pos = pos + 1;
-        ptr->Rlink = newnode; // ptr was at end, now ptr's right link points to newnode ->newnode is at the end now
+        ptr->Rlink = newnode;
         newnode->Llink = ptr;
         printf("Inserted at Position %d\n", pos);
     }
 }
 
-void insertAtAny_secondMethod(int data, int key)
+void insertAtAny(int data, int key)
 {
     struct Node *newnode = CreateNode(data);
     struct Node *ptr = header;
@@ -62,7 +61,6 @@ void insertAtAny_secondMethod(int data, int key)
         header = newnode;
     else
     {
-        // traverse until key is found or ptr is null
         while (ptr != NULL && ptr->data != key)
         {
             ptr = ptr->Rlink;
@@ -73,60 +71,17 @@ void insertAtAny_secondMethod(int data, int key)
             free(newnode);
             return;
         }
-        // updating links / connecting newnode to the linkedlist
         newnode->Rlink = ptr->Rlink;
         ptr->Rlink = newnode;
-
         if (ptr->Rlink != NULL)
         {
-            ptr->Rlink->Llink = newnode; // updating next node's leftlink by pointing it towards newnode.
+            ptr->Rlink->Llink = newnode;
         }
         ptr->Rlink = newnode;
     }
 }
-
-void insertAtAny(int data, int pos)
-{
-    // this function would check for the desired position and insert at that position
-    struct Node *newnode = CreateNode(data);
-    struct Node *ptr = header, *prev;
-    int currentPos = 1;
-    if (pos == 1)
-    {
-        newnode->Rlink = header;
-        header = newnode;
-    }
-    else if (pos == 0)
-    {
-        printf("Node Starts at 1");
-    }
-    else
-    {
-        while (ptr != NULL && currentPos < pos)
-        {
-            prev = ptr;
-            ptr = ptr->Rlink;
-            currentPos++;
-        }
-        if (currentPos == pos)
-        {
-            newnode->Llink = prev;
-            newnode->Rlink = ptr;
-            prev->Rlink = newnode;
-            if (ptr != NULL)
-                ptr->Llink = newnode;
-        }
-        else
-        {
-            printf("Position not found\n");
-            free(newnode);
-        }
-    }
-}
-
 void deleteAtFront()
 {
-    // deleting header node and makes the next node as header
     struct Node *ptr = header;
     if (header == NULL)
         printf("Empty List\n");
@@ -142,7 +97,6 @@ void deleteAtFront()
 
 void deleteAtEnd()
 {
-    // traverse to end, delete last node, makes previous's Rlink as null
     struct Node *prev, *ptr = header;
     int pos = 1;
     if (header == NULL)
@@ -170,7 +124,7 @@ void deleteAtAny(int key)
         printf("List is Empty\n");
         return;
     }
-    if (ptr->data == key) // case when key is at head
+    if (ptr->data == key)
     {
         header = ptr->Rlink;
         if (header != NULL)
@@ -179,7 +133,6 @@ void deleteAtAny(int key)
         printf("Deleted %d\n", key);
         return;
     }
-    // traversing to find key
     while (ptr != NULL && ptr->data != key)
     {
         prev = ptr;
@@ -190,9 +143,8 @@ void deleteAtAny(int key)
         printf("Key Not Found\n");
         return;
     }
-    // key is found, update links to remove
     prev->Rlink = ptr->Rlink;
-    if (ptr->Rlink != NULL) // if key is not at the end of the list
+    if (ptr->Rlink != NULL)
         ptr->Rlink->Llink = prev;
     free(ptr);
     printf("Deleted key %d.\n", key);
@@ -265,8 +217,7 @@ int main()
             scanf("%d", &key);
             printf("Enter data");
             scanf("%d", &data);
-            insertAtAny_secondMethod(data, key);
-            // printf("Data inserted at Position %d", key);
+            insertAtAny(data, key);
             break;
         case 4:
             deleteAtEnd();
@@ -279,7 +230,6 @@ int main()
             printf("What element you want to delete\n");
             scanf("%d", &key);
             deleteAtAny(key);
-            // printf("Deleted key %d", key);
             break;
         case 7:
             traversal();

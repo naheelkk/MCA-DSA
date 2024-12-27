@@ -1,20 +1,5 @@
-/*
-?. Bit vector representation of set
-?. Union, Intersection, Complement, Set Difference
-there's a Universal set char[26] to store letters 'a' -> 'z'
-char set1[26], char set2[26], which will take input from user.
-func bitVector(set1) => set1_bit if set1[i] present in U then 1  otherwise 0
-
-functions for set ops(menu driven ofcourse);
-UNION -> union(set1_bit,set2_bit) : for(condtn) => set1_bit | set2_bit;
-COMPLEMENT -> Flip bits
-DIFFERENCE -> (set1_bit) & (set2_bit complement)
-
-*/
-
 #include <stdio.h>
 #include <ctype.h>
-
 void bitVector(char set[], int bit_vector[], char U[])
 {
     for (int i = 0; i < 26; i++)
@@ -42,13 +27,11 @@ void printBitVector(int bit_vector[])
     }
     printf("\n");
 }
-
 void union_operation(int set1_bit[], int set2_bit[], int result[])
 {
     for (int i = 0; i < 26; i++)
         result[i] = set1_bit[i] | set2_bit[i];
 }
-
 void intersection(int set1_bit[], int set2_bit[], int result[])
 {
     for (int i = 0; i < 26; i++)
@@ -64,7 +47,6 @@ void complementOperation(int set_bit[], int result[])
         result[i] = (set_bit[i] == 0) ? 1 : 0;
     }
 }
-
 void difference(int set1_bit[], int set2_bit[], int result[])
 {
     int complement[26];
@@ -72,14 +54,12 @@ void difference(int set1_bit[], int set2_bit[], int result[])
     for (int i = 0; i < 26; i++)
         result[i] = set1_bit[i] & set2_bit[i];
 }
-
 int main()
 {
     char Universal_set[26] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
     char set1[26], set2[26];
     int set1_bit[26], set2_bit[26], result[26];
     int set1_size, set2_size;
-
     // Set 1
     printf("Enter size of Set 1: ");
     scanf("%d", &set1_size);
@@ -90,7 +70,6 @@ int main()
         set1[i] = tolower(set1[i]);
     }
     set1[set1_size] = '\0';
-
     // Set 2
     printf("\nEnter size of Set 2: ");
     scanf("%d", &set2_size);
@@ -101,16 +80,13 @@ int main()
         set2[i] = tolower(set2[i]);
     }
     set2[set2_size] = '\0';
-
     // Function Calls
     bitVector(set1, set1_bit, Universal_set);
     printf("\nBit Vector Representation of Set 1: \n");
     printBitVector(set1_bit);
-
     bitVector(set2, set2_bit, Universal_set);
     printf("\nBit Vector Representation of Set 2: \n");
     printBitVector(set2_bit);
-
     // Menu Implementation Starts Here!
     int choice;
     while (choice != 5)
@@ -141,9 +117,9 @@ int main()
         case 4:
             difference(set1_bit, set2_bit, result);
             printf("\nSet Difference S1 - S2 is :\n");
-	    printBitVector(result);
-	    difference(set2_bit, set1_bit, result);
-	    printf("\nSet Difference S2 - S1 is :\n");
+            printBitVector(result);
+            difference(set2_bit, set1_bit, result);
+            printf("\nSet Difference S2 - S1 is :\n");
             printBitVector(result);
             break;
         case 5:
