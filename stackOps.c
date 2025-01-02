@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int top = -1, size = 5, item, arr_stack[10];
+int top = -1, size = 5, item, arr_stack[5];
 void push()
 {
     if (top >= size - 1)

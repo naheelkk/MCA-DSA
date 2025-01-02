@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+// #include <stdlib.h>
 
 int front = 0, rear = -1, size = 5, item, arr_queue[5];
 
@@ -22,6 +22,8 @@ void dequeue()
     if (front > rear)
     {
         printf("Underflow (Queue is Empty)\n");
+        front = 0;
+        rear = -1;
     }
     else
     {
