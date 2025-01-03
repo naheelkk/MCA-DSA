@@ -112,7 +112,7 @@ void deleteAtEnd()
         // pos = pos + 1;
         prev->Rlink = NULL;
         free(ptr);
-        printf("Deleted At %d", pos);
+        printf("Deleted At Node %d", pos);
     }
 }
 

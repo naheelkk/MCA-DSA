@@ -32,6 +32,8 @@ void pop()
 }
 void display()
 {
+    if(top < 0)
+        printf("Empty Stack");
     for (int i = top; i >= 0; i--)
     {
         printf("%d\t", arr_stack[i]);

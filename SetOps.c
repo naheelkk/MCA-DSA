@@ -18,6 +18,20 @@ void bitVector(char set[], int bit_vector[], char U[])
         }
     }
 }
+// void bitVector(char set[], int bitVector[])
+// {
+//     for (int i = 0; i < 26; i++)
+//         bitVector[i] = 0;
+
+//     for (int i = 0; set[i] != '\0'; i++)
+//     {
+//         if (set[i] >= 'a' && set[i] <= 'z')
+//         {
+//             int index = set[i] - 'a';
+//             bitVector[index] = 1;
+//         }
+//     }
+// }
 
 void printBitVector(int bit_vector[])
 {

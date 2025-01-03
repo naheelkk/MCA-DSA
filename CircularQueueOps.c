@@ -22,7 +22,7 @@ void enqueue(int element)
     {
         front = rear = 0;
     }
-    else if (rear == MAX - 1 && front != 0)
+    else if (rear == MAX - 1 && front != 0) //rear is at end and front is not 0th element
     {
         rear = 0;
     }
