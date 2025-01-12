@@ -2,20 +2,20 @@
 
 #define MAX 100 // Maximum number of elements
 
-// Structure to represent a disjoint set
+
 struct DisjointSet {
     int parent[MAX];
     int rank[MAX];
-    int elements[MAX]; // To store the actual elements
+    int elements[MAX]; 
 };
 
-// Initialize each element as its own set (MakeSet)
+
 void makeSet(struct DisjointSet* ds, int n) {
     printf("Enter %d elements:\n", n);
     for (int i = 0; i < n; i++) {
         scanf("%d", &ds->elements[i]); // Read the element
-        ds->parent[i] = i;             // Each element is its own parent
-        ds->rank[i] = 0;               // Rank is initialized to 0
+        ds->parent[i] = i;             
+        ds->rank[i] = 0;              
     }
 }
 
@@ -29,16 +29,15 @@ int findElementIndex(struct DisjointSet* ds, int n, int element) {
     return -1; // Element not found
 }
 
-// Find the representative of the set containing 'x' (FindSet with path compression)
+
 int findSet(struct DisjointSet* ds, int x) {
     if (ds->parent[x] != x) {
-        // Path compression: recursively find the root and make it the parent of 'x'
         ds->parent[x] = findSet(ds, ds->parent[x]);
     }
     return ds->parent[x];
 }
 
-// Union of two sets by rank
+
 void unionSets(struct DisjointSet* ds, int x, int y) {
     int rootX = findSet(ds, x);
     int rootY = findSet(ds, y);
@@ -56,7 +55,7 @@ void unionSets(struct DisjointSet* ds, int x, int y) {
     }
 }
 
-// Main function to demonstrate the operations
+
 int main() {
     struct DisjointSet ds;
     int n, choice, x, y;
